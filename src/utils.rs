@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::Path;
 
-fn read_file(day: u32, file_type: &str) -> String {
+pub fn read_file(day: u32, file_type: &str) -> String {
     let file_path = format!("src/days/d{:02}/{}", day, file_type);
     fs::read_to_string(Path::new(&file_path))
         .expect(&format!("Failed to read {}", file_path))
