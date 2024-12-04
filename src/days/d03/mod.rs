@@ -32,17 +32,17 @@ fn process_b(_input: &str) -> i32 {
     let mut s = 0; 
     let mut i = 0;
     let mut enabled = true;
-    let sdo = "do()";
-    let sdont = "don't()";
     let re = Regex::new(r"^mul\((\d+),(\d+)\)").unwrap();
     
     while i < _input.len() {
-        if _input[i..].starts_with(sdo) {
+        if _input[i..].starts_with("do()") {
             enabled = true;
-            i += sdo.len()-1;
-        } else if _input[i..].starts_with(sdont) {
+            i += 4 
+
+        } else if _input[i..].starts_with("don't()") {
             enabled = false;
-            i += sdont.len()-1;
+            i += 7
+
         } else if let Some(caps) = re.captures(&_input[i..]) {
             let x = caps[1].parse::<i32>().unwrap();
             let y = caps[2].parse::<i32>().unwrap();
@@ -50,10 +50,12 @@ fn process_b(_input: &str) -> i32 {
                 s += prod(x,y);
             }
             i += caps[0].len(); 
+            
         } else {
             i += 1;
         }
     }
+
     s
 }
 
